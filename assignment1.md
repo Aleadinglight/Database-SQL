@@ -1,4 +1,4 @@
-`sqlite> .tables`
+```sqlite> .tables```
 1.Select all the countries
 ```
 sqlite> .schema country
