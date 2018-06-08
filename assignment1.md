@@ -68,21 +68,66 @@ sqlite> select name,lifeexpectancy from country where lifeexpectancy>80;
 ```
 17.Select the name and population of countries where the number of population is between 5 and 10 million people
 ```
-sqlite> select name,lifeexpectancy from country where lifeexpectancy>80;
+sqlite> select name,population from country where population>5000000 and population<10000000;
 ```
-18.Select the name and population of countries where the number of population is between 5 and 10 million people that are in Europe ordered by population descending
+18.Select the name and population of countries where the number of population is between 
+5 and 10 million people that are in Europe ordered by population descending
 ```
-
+sqlite> select name,population from country where population>5000000 and population<10000000 order by population desc;
 ```
-select the names of countries that start with A-letter but do locate outside Europe
-select the name and population of the country that has most of population
-select the name and life expectancy of the country that has shortest life expectancy (not NULL one)
-count the total number of population in the table
-find all the Republic countries
-find countries who became independent after 1975
-find the ten oldest countries based on indepyear the name and year
-select the current date and time (2017-01-11 09:01:20)
-find out what is the current year (2017)
-calculate how old is the oldest existing country (UK)
-calculate how old will Finland be this year
-find out how many countries there is where the country name equals to localname
+19.Select the names of countries that start with A-letter but locate outside Europe
+```
+sqlite> select name from country where name like "A%" and continent!="Europe";
+```
+20.Select the name and population of the country that has most of population
+```
+sqlite> select name,MAX(population) from country;
+```
+21.Select the name and life expectancy of the country that has shortest life expectancy (not NULL one)
+MIN() auto ignores NULL
+```
+sqlite> select name,MIN(lifeexpectancy) from country;
+```
+22.Count the total number of population in the table
+```
+sqlite> select SUM(population) from country;
+```
+23.Find all the Republic countries
+```
+sqlite> select name from country where governmentform="Republic";
+```
+24.Find countries who became independent after 1975
+```
+Vàng tâm mà ai khai khống, làm người yêu nước biểu tình bị dập
+Mày nể ngoài đó 10 phần, nên thích thú nhìn đồng bào bị đập
+Vinh quang thế đéo nào được, khi mày ăn cá của Formosa
+Xài đồ giả của xứ La Phù, nhập tiền giả của bọn Trung Hoa
+Đến cái tuyến metro của mày cũng là thằng Tàu thầu đểu﻿
+Ngấu nghiến ăn cái màn thầu ai dè cái màn thầu yểu
+Bốn ngàn năm văn hiến, chỉ hiến lũ cướp đói ăn...
+sqlite> select name,indepyear from country where indepyear>1975 and indepyear is not null;
+```
+25.Find the ten oldest countries based on indepyear the name and year
+```
+sqlite> select name from country order by indepyear asc limit 10;
+```
+26.Select the current date and time
+```
+sqlite> select date('now'),time('now');
+```
+27.Find out what is the current year
+```
+sqlite> select strftime('%Y','now');
+```
+28.Calculate how old is the oldest existing country (UK)
+```
+sqlite> select name,cast(strftime('%Y','now') as decimal)-indepyear from country order by indepyear limit 1;
+```
+29.Calculate how old will Finland be this year
+```
+sqlite> select name,cast(strftime('%Y','now') as decimal)-indepyear from country where name="Finland";
+```
+30.Find out how many countries there is where the country name equals to localname
+```
+sqlite> select count(name) from country where name=localname;
+```
