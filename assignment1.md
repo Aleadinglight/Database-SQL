@@ -36,7 +36,7 @@ sqlite> select name from country where name like "%ia";
 ```
 9.Select region and the country names but order the result initially by the region and then by the country name
 ```
-sqlite> select region,name from country order by region;
+sqlite> select region,name from country order by region,name;
 ```
 10.Select the country names ordered by the population, the biggest countries first
 ```
@@ -58,10 +58,22 @@ sqlite> select continent,name from country where continent="Europe";
 ```
 sqlite> select continent,name from country where continent="Europe" or continent="Asia";
 ```
-15.Find region, name and population of the first biggest European counties by size	
-select the name and life expectancy of countries where life expectancy is more than 80
-select the name and population of countries where the number of population is between 5 and 10 million people
-select the name and population of countries where the number of population is between 5 and 10 million people that are in Europe ordered by population descending
+15.Find region, name and population of the first biggest European counties by size
+```
+sqlite> select region,name,population from country order by surfacearea desc;
+```	
+16.Select the name and life expectancy of countries where life expectancy is more than 80
+```
+sqlite> select name,lifeexpectancy from country where lifeexpectancy>80;
+```
+17.Select the name and population of countries where the number of population is between 5 and 10 million people
+```
+sqlite> select name,lifeexpectancy from country where lifeexpectancy>80;
+```
+18.Select the name and population of countries where the number of population is between 5 and 10 million people that are in Europe ordered by population descending
+```
+
+```
 select the names of countries that start with A-letter but do locate outside Europe
 select the name and population of the country that has most of population
 select the name and life expectancy of the country that has shortest life expectancy (not NULL one)
